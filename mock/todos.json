@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "task": "Wash the Touareg",
+    "priority": "b_medium",
+    "complete": false,
+    "groupRefId": 1
+  },
+  {
+    "id": 2,
+    "task": "Bathe the dogs",
+    "priority": "b_medium",
+    "complete": false,
+    "groupRefId": 1
+  },
+  {
+    "id": 6,
+    "task": "Shower the boys",
+    "priority": "a_high",
+    "complete": true,
+    "groupRefId": 1
+  },
+  {
+    "id": 7,
+    "task": "Complete full stack project - edit",
+    "priority": "a_high",
+    "complete": true,
+    "groupRefId": 4
+  },
+  {
+    "id": 10,
+    "task": "Update LinkedIn profile - edit",
+    "priority": "c_low",
+    "complete": false,
+    "groupRefId": 2
+  },
+  {
+    "id": 12,
+    "task": "Take Teamtreehouse SQL modules",
+    "priority": "b_medium",
+    "complete": false,
+    "groupRefId": 4
+  }
+]

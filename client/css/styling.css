@@ -1,0 +1,118 @@
+/* ============================
+	Base Element Styles
+===============================*/
+
+body{
+	
+	font-family: 'Architects Daughter';
+	font-size: 14px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 20px;
+	background-color: #0f0802;
+	background-image: url(https://www.transparenttextures.com/patterns/leather.png);
+
+}
+
+
+h1 {
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-top: .5em;
+	color: #b6c9c9;
+	text-shadow: 2px 2px 4px #000000;
+	font-family: 'Architects Daughter';
+	font-size: 2em;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 26px;	
+}
+
+form {
+	margin-left: 5em;
+	padding-top: 1em;
+}
+
+table {
+	margin-left: 4em;
+}
+
+label {
+	font-family: 'Architects Daughter';
+	font-size: 17px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 15px;
+}
+
+
+/**********************************************
+Styling parameters for wrapper and container
+ *********************************************/
+.wrapper {
+	padding-bottom: 200px;
+	max-width: 80%;
+	margin: 0 10%;
+	background-color: #c9c920;
+	background-image: url(https://www.transparenttextures.com/patterns/notebook.png);
+}
+
+.container {
+	/*Establishes the parameters for sticky footer*/
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -20em;
+	max-width: 100%
+}
+
+.main-header {
+	text-align: center;
+	height: 100px;
+	font-family: 'Righteous', cursive;
+	font-size: 3rem;
+	background-color: #c9ae00;
+	background-image: url(https://www.transparenttextures.com/patterns/noisy-net.png);
+	background-position: center;
+}
+
+.push {
+	height: 6em;
+}
+
+/*Establishes the parameters for sticky footer*/
+.footer, .push {
+	font-size: 1em;
+	height: 20em;
+	clear: both;
+	text-align: center;
+}
+
+
+
+.high_Priority {
+	background-color: red;
+}
+
+.medium_Priority {
+	background-color: yellow;
+}
+
+.low_Priority {
+	background-color: green;
+}
+
+#row1 {
+	margin-bottom: 2em;
+}
+
+#todoList {
+	text-align: left;
+}
+
+.editTask {
+	background: none;
+}

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+	<meta charset="UTF-8">
+	<title>To Do List</title>
+
+	<!-- bower:css -->
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+	<link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
+	<!-- endbower -->
+	
+	<!-- inject:css -->
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/styling.css">
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Architects+Daughter" />
+	<!-- endinject -->
+
+</head>
+<body ng-controller="TodoController as vm">
+	
+
+	
+	<div class=wrapper>
+		<header class="main-header">
+			<h1>My To Do List</h1>
+		</header>
+
+
+		<div class="container">
+			
+			<!-- Set-up of the input to do list form -->
+			<div class="row" id="row1">
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					<form ng-submit="vm.addNew(vm.newTodo)" class="form-horizontal" role="form">
+						<div>
+							<legend>Add Todo Item</legend>
+						</div>
+						<div class="form-group">
+							<label for="input-id" class="col-sm-2">Text</label>
+							<input type="text" class="form-control" required="required" title="Text" ng-model="vm.newTodo.task">
+						</div>
+						<div class="form-group">	
+							<label for="input-id" class="col-sm-2">Priority</label>
+							<select name="" class="form-control" required="required" ng-model="vm.newTodo.priority">
+								<option value="" style="display: none;">-- Select --</option>
+								<option value="a_high">A high priority item</option>
+								<option value="b_medium">A medium priority item</option>
+								<option value="c_low">A low priority item</option>
+							</select>
+						</div>
+						<div class="form-group">	
+							<label for="input-id" class="col-sm-2">Type</label>
+							<select name="" class="form-control" required="required" ng-model="vm.newTodo.groupRefId">
+								<option value="" style="display: none;">-- Select --</option>
+								<option value=1>Home</option>
+								<option value=2>Work</option>
+								<option value=3>Personal</option>
+								<option value=4>School</option>
+							</select>
+						</div>
+						<div>
+							<input type="hidden" ng-model="vm.newTodo.complete" ng-init="vm.newTodo.complete = false">
+						</div>	
+						<div class="col-sm-6">
+							<input type="submit" value="Submit" class="btn btn-primary" id="submit_Button">
+						</div>
+					</form>
+				</div>
+			</div>
+			<br>
+			
+			<!-- Lay out of the sorting buttons -->
+			<div class="row">	
+				<div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
+					<div class="row">
+						<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-md-offset-2">
+							<a href="" class="btn btn-primary btn-sm" ng-click="vm.sortButton('priority')">Order by highest priority</a>
+						</div>	
+						<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-md-offset-1">
+							<a href="" class="btn btn-primary btn-sm" ng-click="vm.sortButton('priority')">Order by lowest priority</a>
+						</div>
+						<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-md-offset-1">
+							<a href="" class="btn btn-primary btn-sm" ng-click="vm.sortButton('task')">Order 
+							Alphabetically</a>
+						</div>
+					</div>
+					<br>
+
+					<!-- Set-up of dynamic table -->
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Edit / Delete</th>
+										<th>Type</th>
+										<th>Todo</th>
+										<th>Complete</th>
+									</tr>
+								</thead>
+								<!-- Added ui-sortable into the tbody to call the drag and drop function -->
+								<tbody ui-sortable="sortableOptions" ng-model='vm.todos'>
+									<tr ng-repeat="todo in vm.todos" ng-class="{danger: todo.priority == 'a_high', warning : todo.priority == 'b_medium', success : todo.priority == 'c_low'}">
+										<td width="15%">
+											<button type="button" class="btn btn-success" ng-click="editTask = !editTask" ng-hide="editTask">
+												<span class="glyphicon glyphicon-pencil"></span>
+											</button>
+											<button type="button" class="btn btn-danger" ng-click="vm.removeRow(todo._id)" ng-hide="editTask">
+												<span class="glyphicon glyphicon-remove"></span>
+											</button>									
+											<button type="button" class="btn btn-primary" ng-click="editTask = !editTask; vm.editRow(todo._id,todo)" ng-show="editTask">
+												<span class="glyphicon glyphicon-ok"></span>
+											</button>
+										</td>
+										<td width='20%' ng-if="todo.groupRefId===1">Home</td>
+										<td width='20%' ng-if="todo.groupRefId===2">Work</td>
+										<td width='20%' ng-if="todo.groupRefId===3">Personal</td>
+										<td width='20%' ng-if="todo.groupRefId===4">School</td>
+										<td width="50%">
+											<div ng-hide="editTask">{{todo.task}}</div>
+											<div ng-show="editTask"><input type="text" ng-model="todo.task" id="editTask" width="300" id="editTextBox"></div>
+										</td>
+										<td width="15%">
+											<div ng-hide="editTask"><label><input type="checkbox" ng-model="todo.complete" ng-click="vm.editRow(todo._id,todo)">Task Complete</label></div>
+										</td>
+									</tr>
+									<tr ng-repeat="x in vm.todos"></tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Used to set up sticky footer -->
+		<div class="push"></div>
+
+		<div class="footer">
+			<br>
+			<span>&copy; Repertus Creative Works</span>
+			<br>
+			<span><a href="mailto: RobertMdC@gmail.com"><img src="imgs/glyphicons-social-19-gmail.png"></a></span>
+			<span><a href="https://www.linkedin.com/in/robertmdelc"><img src="imgs/glyphicons-social-18-linked-in.png"></a></span>
+			<span><a href="https://github.com/repertus"><img src="imgs/glyphicons-gitHub.png" width="25"></a></span>		
+		</div>
+	</div>	
+
+
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/jquery-ui/jquery-ui.js"></script>
+<script src="bower_components/angular-ui-sortable/sortable.js"></script>
+<script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+<!-- endbower -->
+
+<!-- inject:js -->
+<script src="/app/app.js"></script>
+<script src="/app/todo.factory.js"></script>
+<script src="/app/todos.controller.js"></script>
+<!-- endinject -->
+
+<!-- <pre>{{vm.todos.todos[0].task}}</pre> -->
+<!-- <pre>{{vm.todos | json}}</pre> -->
+	
+</body>
+</html>
